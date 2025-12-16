@@ -1,7 +1,11 @@
 def main():
     banks = read_file() 
-    banks = ["987654321111111", "811111111111119", "234234234234278", "818181911112111"]
-    banks = [banks[0]]
+    # banks = ["987654321111111", "811111111111119", "234234234234278", "818181911112111"]
+    # banks = [banks[:]]
+    # banks = ["8666467466748463644436358474464684357755754832476479449554745556415435374495644765744447544234798447",
+    #          "2335242224342412391423234223574342632221234413244136124423434433531252523312322433224322224222243422",
+    #          "1333332334833332432232224334393373323336233244233224333373332433113231332432333333423134322352433433"]
+    # banks = [banks[0]]
     total = 0
     for bank in banks:
         result = highest_joltage(bank)
@@ -17,9 +21,10 @@ def read_file():
 def highest_joltage(bank):
     bank = [int(num) for num in bank]
     nums = []
-    leeway = 4
+    leeway = len(bank) - 12 + 1
+
     for i in range(12):
-        nums.append(max(bank[:leeway-1]))
+        nums.append(max(bank[:leeway]))
         leeway -= bank.index(nums[i])
         bank = bank[bank.index(nums[i])+1:]
     return int("".join([str(num) for num in nums]))
